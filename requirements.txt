@@ -6,11 +6,11 @@ chardet==3.0.4
 decorator==4.4.2
 defusedxml==0.5.0
 Django==2.2
-django-allauth==0.37.1
-django-cors-headers==2.4.0
 django-phonenumber-field==4.0.0
-django-rest-auth==0.9.3
 djangorestframework==3.11.0
+django-allauth==0.42.0
+django-cors-headers==3.3.0
+django-rest-auth==0.9.5
 gunicorn==19.7.1
 idna==2.7
 ipython==7.13.0

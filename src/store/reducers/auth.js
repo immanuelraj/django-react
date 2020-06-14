@@ -4,8 +4,6 @@ import { updateObject } from "../utility";
 const initialState = {
   token: null,
   username: null,
-  is_student: null,
-  is_teacher: null,
   userId: null,
   error: null,
   loading: false
@@ -22,8 +20,6 @@ const authSuccess = (state, action) => {
   return updateObject(state, {
     token: action.user.token,
     username: action.user.username,
-    is_student: action.user.is_student,
-    is_teacher: action.user.is_teacher,
     userId: action.user.userId,
     error: null,
     loading: false
@@ -43,6 +39,15 @@ const authLogout = (state, action) => {
   });
 };
 
+const authPasswordReset = (state, action) => {
+  return updateObject(state, {
+    token: action.user.token,
+    userId: action.user.userId,
+    error: null,
+    loading: false
+  });
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.AUTH_START:
@@ -53,6 +58,8 @@ const reducer = (state = initialState, action) => {
       return authFail(state, action);
     case actionTypes.AUTH_LOGOUT:
       return authLogout(state, action);
+    case actionTypes.AUTH_PASSWORD_RESET:
+      return authPasswordReset(state, action);
     default:
       return state;
   }

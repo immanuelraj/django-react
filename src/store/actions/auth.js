@@ -28,6 +28,13 @@ export const logout = () => {
   };
 };
 
+export const authReset = user => {
+  return {
+    type: actionTypes.AUTH_PASSWORD_RESET,
+    user
+  };
+};
+
 export const checkAuthTimeout = expirationTime => {
   return dispatch => {
     setTimeout(() => {
@@ -49,8 +56,6 @@ export const authLogin = (username, password) => {
           token: res.data.key,
           username,
           userId: res.data.user,
-          is_student: res.data.user_type.is_student,
-          is_teacher: res.data.user_type.is_teacher,
           expirationDate: new Date(new Date().getTime() + 3600 * 1000)
         };
         localStorage.setItem("user", JSON.stringify(user));
@@ -68,7 +73,6 @@ export const authSignup = (
   email,
   password1,
   password2,
-  is_student
 ) => {
   return dispatch => {
     dispatch(authStart());
@@ -77,8 +81,6 @@ export const authSignup = (
       email,
       password1,
       password2,
-      is_student,
-      is_teacher: !is_student
     };
     axios
       .post("http://127.0.0.1:8000/rest-auth/registration/", user)
@@ -87,12 +89,36 @@ export const authSignup = (
           token: res.data.key,
           username,
           userId: res.data.user,
-          is_student,
-          is_teacher: !is_student,
           expirationDate: new Date(new Date().getTime() + 3600 * 1000)
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
+        dispatch(checkAuthTimeout(3600));
+      })
+      .catch(err => {
+        dispatch(authFail(err));
+      });
+  };
+};
+
+
+export const authPasswordReset = (token, password) => {
+  return dispatch => {
+    dispatch(authStart());
+    axios.defaults.headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${token}`
+    };
+    axios
+      .post(`http://127.0.0.1:8000/rest-auth/password/change/`, password)
+      .then(res => {
+        const user = {
+          token: res.data.key,
+          userId: res.data.user,
+          expirationDate: new Date(new Date().getTime() + 3600 * 1000)
+        };
+        localStorage.setItem("user", JSON.stringify(user));
+        dispatch(authReset(user));
         dispatch(checkAuthTimeout(3600));
       })
       .catch(err => {

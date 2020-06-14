@@ -5,8 +5,6 @@ import BaseRouter from "./routes";
 import "antd/dist/antd.css";
 import * as actions from "./store/actions/auth";
 
-import CustomLayout from "./containers/Layout";
-
 class App extends Component {
   componentDidMount() {
     this.props.onTryAutoSignup();
@@ -15,9 +13,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <CustomLayout {...this.props}>
-          <BaseRouter />
-        </CustomLayout>
+        <BaseRouter />
       </Router>
     );
   }
@@ -25,7 +21,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token === null
   };
 };
 

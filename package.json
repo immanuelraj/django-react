@@ -1,16 +1,20 @@
 {
-  "name": "django-react-boilerplate",
+  "name": "grossy",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.7.3",
-    "axios": "^0.18.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
+    "@ant-design/icons": "^4.2.1",
+    "antd": "^4.3.3",
+    "axios": "^0.19.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-geocode": "^0.2.1",
+    "react-google-autocomplete": "^1.2.6",
+    "react-google-maps": "^9.4.5",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
@@ -21,7 +25,19 @@
     "postinstall": "npm run build"
   },
   "engines": {
-    "node": "9.5.0",
-    "npm": "6.4.1"
+    "node": "14.4.0",
+    "npm": "6.14.4"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
